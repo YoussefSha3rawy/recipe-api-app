@@ -14,12 +14,14 @@ from core.models import (
 )
 from recipe import serializers
 
+from rest_framework_simplejwt import authentication
+
 
 class RecipeViewSet(viewsets.ModelViewSet):
     """View for manage recipe APIs."""
     serializer_class = serializers.RecipeDetailSerializer
     queryset = Recipe.objects.all()
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [authentication.JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
